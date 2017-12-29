@@ -11,15 +11,15 @@ class Decks extends Component {
 
   componentDidMount() {
     var self = this;
-    addCardToDeck("JavaScript", createCard(
-      "Does React Nanodegree teach you JavaScript",
-      "Yes, totally!"
-    )).then(() => {
+    // addCardToDeck("JavaScript", createCard(
+    //   "Does React Nanodegree teach you JavaScript",
+    //   "Yes, totally!"
+    // )).then(() => {
       getDecks()
         .then((decks) => {
           self.setState({ decks });
         });
-    });
+    // });
   }
 
   render() {
