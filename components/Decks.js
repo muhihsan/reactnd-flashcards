@@ -1,33 +1,36 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, Platform, TouchableOpacity } from 'react-native';
+import { connect } from 'react-redux';
+import { receiveEntries } from '../actions';
 import { getDecks, addCardToDeck } from '../utils/api';
 import { createCard } from '../utils/helpers';
 
 class Decks extends Component {
   state = {
-    ready: false,
-    decks: null
+    ready: false
   }
 
   componentDidMount() {
     var self = this;
+    const { dispatch } = self.props;
     // addCardToDeck("JavaScript", createCard(
     //   "Does React Nanodegree teach you JavaScript",
     //   "Yes, totally!"
     // )).then(() => {
-      getDecks()
-        .then((decks) => {
-          self.setState({ decks });
-        });
+    getDecks()
+      .then((decks) => dispatch(receiveEntries(decks)))
+      .then(({ decks }) => {
+        self.setState({ ready: true });
+      });
     // });
   }
 
   render() {
-    const { decks } = this.state;
-
+    const { decks } = this.props;
+    
     return (
       <View style={styles.items}>
-        {decks && decks.map((deck) => (
+        {decks && JSON.stringify(decks) !== '{}' && decks.map((deck) => (
           <TouchableOpacity
             key={deck.title}
             style={styles.item}
@@ -66,4 +69,10 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Decks;
+function mapStateToProps(entries) {
+  return {
+    decks: entries.decks
+  };
+}
+
+export default connect(mapStateToProps)(Decks);
