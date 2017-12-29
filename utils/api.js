@@ -10,7 +10,7 @@ export function getDecks() {
 
 export function getDeck(title) {
   return getDecks().then((decks) => {
-    return (decks && decks[title]) ? decks[title] : null;
+    return (decks) ? decks.find((deck) => deck.title === title) : null;
   });
 }
 
