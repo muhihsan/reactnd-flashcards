@@ -4,3 +4,10 @@ export function createCard(question, answer) {
     answer: answer
   };
 }
+
+export function getDecksWithoutKeys(decks) {
+  const keys = Object.keys(decks);
+  return keys.map((key) => {
+    return decks[key];
+  });
+}
