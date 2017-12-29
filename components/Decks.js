@@ -33,7 +33,7 @@ class Decks extends Component {
             style={styles.item}
             onPress={() => this.props.navigation.navigate(
               'DeckDetail',
-              { deckTitle: decks.title }
+              { deckTitle: deck.title }
             )}>
             <Text>{deck.title}</Text>
             <Text>{deck.questions.length} card{deck.questions.length > 1 ? 's' : ''}</Text>

@@ -22,24 +22,24 @@ const Tabs = TabNavigator({
     }
   }
 }, {
-  navigationOptions: {
-    header: null
-  },
-  tabBarOptions: {
-    activeTintColor: Platform.OS === 'ios' ? 'black' : 'white',
-    style: {
-      height: 56,
-      backgroundColor: Platform.OS === 'ios' ? 'white' : 'black',
-      shadowColor: 'rgba(0, 0, 0, 0.24)',
-      shadowOffset: {
-        width: 0,
-        height: 3
-      },
-      shadowRadius: 6,
-      shadowOpacity: 1
+    navigationOptions: {
+      header: null
+    },
+    tabBarOptions: {
+      activeTintColor: Platform.OS === 'ios' ? 'black' : 'white',
+      style: {
+        height: 56,
+        backgroundColor: Platform.OS === 'ios' ? 'white' : 'black',
+        shadowColor: 'rgba(0, 0, 0, 0.24)',
+        shadowOffset: {
+          width: 0,
+          height: 3
+        },
+        shadowRadius: 6,
+        shadowOpacity: 1
+      }
     }
-  }
-});
+  });
 
 const MainNavigator = StackNavigator({
   Home: {
