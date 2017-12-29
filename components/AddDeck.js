@@ -1,14 +1,30 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, TextInput, StyleSheet } from 'react-native';
 
 class AddDeck extends Component {
+  state = {
+    deckTitle: ''
+  }
+
   render() {
     return (
-      <View>
-        <Text>Add Deck Component</Text>
+      <View style={styles.item}>
+        <Text>What is the title of your new deck?</Text>
+        <TextInput style={styles.input} onChangeText={(deckTitle) => this.setState({ deckTitle })} />
       </View>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  item: {
+    marginTop: 17
+  },
+  input: {
+    height: 40,
+    borderColor: 'gray',
+    borderWidth: 1
+  }
+});
 
 export default AddDeck;
