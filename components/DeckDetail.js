@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import { AppLoading } from 'expo';
 import { getDeck } from '../utils/api';
 
@@ -39,7 +39,13 @@ class DeckDetail extends Component {
       <View>
         <Text>{deck.title}</Text>
         <Text>{deck.questions.length} card{deck.questions.length > 1 ? 's' : ''}</Text>
-        <Text>Add Card</Text>
+        <TouchableOpacity
+            onPress={() => this.props.navigation.navigate(
+              'AddCard',
+              { deckTitle: deck.title }
+            )}>
+            <Text>Add Card</Text>
+          </TouchableOpacity>
         <Text>Start Quiz</Text>
       </View>
     );
