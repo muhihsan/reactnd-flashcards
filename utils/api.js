@@ -15,7 +15,7 @@ export function getDeck(title) {
 }
 
 export function saveDeckTitle(title) {
-  getDeck(title).then((deck) => {
+  return getDeck(title).then((deck) => {
     if (!deck) {
       return AsyncStorage.mergeItem(FLASHCARDS_STORAGE_KEY, JSON.stringify({
         [title]: {
