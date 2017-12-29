@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Platform } from 'react-native';
+import { View, Text, StyleSheet, Platform, TouchableOpacity } from 'react-native';
 import { getDecks, addCardToDeck } from '../utils/api';
 import { createCard } from '../utils/helpers';
 
@@ -28,10 +28,16 @@ class Decks extends Component {
     return (
       <View style={styles.items}>
         {decks && decks.map((deck) => (
-          <View key={deck.title} style={styles.item}>
+          <TouchableOpacity
+            key={deck.title}
+            style={styles.item}
+            onPress={() => this.props.navigation.navigate(
+              'DeckDetail',
+              { deckTitle: decks.title }
+            )}>
             <Text>{deck.title}</Text>
             <Text>{deck.questions.length} card{deck.questions.length > 1 ? 's' : ''}</Text>
-          </View>
+          </TouchableOpacity>
         ))}
       </View>
     );
