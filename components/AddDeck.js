@@ -11,6 +11,7 @@ class AddDeck extends Component {
       <View style={styles.item}>
         <Text>What is the title of your new deck?</Text>
         <TextInput style={styles.input} onChangeText={(deckTitle) => this.setState({ deckTitle })} />
+        <Text>Submit</Text>
       </View>
     );
   }
