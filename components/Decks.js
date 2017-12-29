@@ -24,10 +24,9 @@ class Decks extends Component {
 
   render() {
     const { decks } = this.state;
-    console.log(decks);
 
     return (
-      <View>
+      <View style={styles.items}>
         {decks && decks.map((deck) => (
           <View key={deck.title} style={styles.item}>
             <Text>{deck.title}</Text>
@@ -40,6 +39,9 @@ class Decks extends Component {
 }
 
 const styles = StyleSheet.create({
+  items: {
+    marginTop: 10
+  },
   item: {
     backgroundColor: 'white',
     borderRadius: Platform.OS === 'ios' ? 16 : 2,
