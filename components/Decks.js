@@ -30,7 +30,8 @@ class Decks extends Component {
       <View>
         {decks && decks.map((deck) => (
           <View key={deck.title} style={styles.item}>
-            <Text>{JSON.stringify(deck)}</Text>
+            <Text>{deck.title}</Text>
+            <Text>{deck.questions.length} card{deck.questions.length > 1 ? 's' : ''}</Text>
           </View>
         ))}
       </View>
