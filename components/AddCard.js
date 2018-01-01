@@ -19,7 +19,7 @@ class AddCard extends Component {
 
   toDeckDetail = () => {
     this.props.navigation.dispatch(NavigationActions.back({
-      key: 'AddCard'
+      key: this.props.navigation.state.params.deckDetailKey
     }));
   }
 
@@ -31,6 +31,7 @@ class AddCard extends Component {
       question: question,
       answer: answer
     };
+
     addCardToDeck(deckTitle, card).then(() => {
       self.props.dispatch(addCard(deckTitle, card));
       self.toDeckDetail();

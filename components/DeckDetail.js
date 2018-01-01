@@ -22,7 +22,10 @@ class DeckDetail extends Component {
         <TouchableOpacity
           onPress={() => this.props.navigation.navigate(
             'AddCard',
-            { deckTitle: deck.title }
+            { 
+              deckTitle: deck.title,
+              deckDetailKey: this.props.navigation.state.key
+            }
           )}>
           <Text>Add Card</Text>
         </TouchableOpacity>
