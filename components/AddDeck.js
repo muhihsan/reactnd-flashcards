@@ -11,9 +11,18 @@ class AddDeck extends Component {
   }
 
   toHome = () => {
-    this.props.navigation.dispatch(NavigationActions.back({
-      key: 'AddDeck'
-    }));
+    const resetAction = NavigationActions.reset({
+      index: 1,
+      actions: [
+        NavigationActions.navigate({ routeName: 'Home' }),
+        NavigationActions.navigate({
+          routeName: 'DeckDetail',
+          params: { deckTitle: this.state.deckTitle }
+        })
+      ]
+    });
+
+    this.props.navigation.dispatch(resetAction);
   }
 
   submit = () => {
