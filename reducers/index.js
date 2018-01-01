@@ -22,7 +22,6 @@ function entries(state = {}, action) {
         ]
       };
     case ADD_CARD:
-      debugger;
       if (!state.decks) {
         return state;
       }
