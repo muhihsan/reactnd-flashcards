@@ -3,6 +3,7 @@ import { View, Text, TextInput, TouchableOpacity, Platform, StyleSheet } from 'r
 import { NavigationActions } from 'react-navigation';
 import { connect } from 'react-redux';
 import { addCardToDeck } from '../utils/api';
+import { addCard } from '../actions/index';
 
 class AddCard extends Component {
   static state = {
@@ -26,11 +27,12 @@ class AddCard extends Component {
     const self = this;
     const { question, answer } = this.state;
     const { deckTitle } = this.props.navigation.state.params;
-    addCardToDeck(deckTitle, {
+    const card = {
       question: question,
       answer: answer
-    }).then(() => {
-      //self.props.dispatch(addDeck(deckTitle));
+    };
+    addCardToDeck(deckTitle, card).then(() => {
+      self.props.dispatch(addCard(deckTitle, card));
       self.toDeckDetail();
     });
   }
@@ -85,4 +87,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default AddCard;
+export default connect()(AddCard);

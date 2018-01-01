@@ -1,4 +1,4 @@
-import { RECEIVE_DECKS, ADD_DECK } from '../actions';
+import { RECEIVE_DECKS, ADD_DECK, ADD_CARD } from '../actions';
 
 function entries(state = {}, action) {
   switch (action.type) {
@@ -21,6 +21,24 @@ function entries(state = {}, action) {
           }
         ]
       };
+    case ADD_CARD:
+      debugger;
+      if (!state.decks) {
+        return state;
+      }
+      const existingDeck = state.decks.find(deck => deck.title === action.deck.title);
+      if (!existingDeck) {
+        return state;
+      }
+      const newState = {
+        ...state,
+        decks: [
+          ...state.decks
+        ]
+      };
+      const existingDeckFromNewState = newState.decks.find(deck => deck.title === action.deck.title);
+      existingDeckFromNewState.questions.push(action.deck.card);
+      return newState;
     default:
       return state;
   }
