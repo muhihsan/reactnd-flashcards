@@ -17,7 +17,7 @@ class AddCard extends Component {
     };
   }
 
-  toDeckDetail = () => {
+  toHome = () => {
     this.props.navigation.dispatch(NavigationActions.back({
       key: this.props.navigation.state.params.deckDetailKey
     }));
@@ -34,7 +34,7 @@ class AddCard extends Component {
 
     addCardToDeck(deckTitle, card).then(() => {
       self.props.dispatch(addCard(deckTitle, card));
-      self.toDeckDetail();
+      self.toHome();
     });
   }
 
