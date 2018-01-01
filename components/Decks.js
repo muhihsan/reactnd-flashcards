@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Platform, TouchableOpacity } from 'react-native';
+import { View, FlatList, Text, StyleSheet, Platform, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import { receiveEntries } from '../actions';
 import { getDecks, addCardToDeck } from '../utils/api';
@@ -25,23 +25,35 @@ class Decks extends Component {
     // });
   }
 
+  keyExtractor = (item, index) => item.title;
+
+  renderItem = ({ item }) => {
+    return (
+      <TouchableOpacity
+        key={item.title}
+        style={styles.item}
+        onPress={() => this.props.navigation.navigate(
+          'DeckDetail',
+          { deckTitle: item.title }
+        )}>
+        <Text>{item.title}</Text>
+        <Text>{item.questions.length} card{item.questions.length > 1 ? 's' : ''}</Text>
+      </TouchableOpacity>
+    );
+  }
+
   render() {
     const { decks } = this.props;
-    
+
     return (
       <View style={styles.items}>
-        {decks && JSON.stringify(decks) !== '{}' && decks.map((deck) => (
-          <TouchableOpacity
-            key={deck.title}
-            style={styles.item}
-            onPress={() => this.props.navigation.navigate(
-              'DeckDetail',
-              { deckTitle: deck.title }
-            )}>
-            <Text>{deck.title}</Text>
-            <Text>{deck.questions.length} card{deck.questions.length > 1 ? 's' : ''}</Text>
-          </TouchableOpacity>
-        ))}
+        {decks && JSON.stringify(decks) !== '{}' &&
+          <FlatList
+            data={decks}
+            renderItem={this.renderItem}
+            keyExtractor={this.keyExtractor}
+          />
+        }
       </View>
     );
   }
