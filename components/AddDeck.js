@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Platform, StyleSheet } from 'react-native';
 import { NavigationActions } from 'react-navigation';
+import { connect } from 'react-redux';
 import { saveDeckTitle } from '../utils/api';
+import { addDeck } from '../actions/index';
 
 class AddDeck extends Component {
   state = {
@@ -18,6 +20,7 @@ class AddDeck extends Component {
     const self = this;
     const { deckTitle } = this.state;
     saveDeckTitle(deckTitle).then(() => {
+      self.props.dispatch(addDeck(deckTitle));
       self.toHome();
     });
   }
@@ -72,4 +75,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AddDeck;
+export default connect()(AddDeck);
