@@ -1,17 +1,23 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import { connect } from 'react-redux';
+import { quizQuestionStatusEnum } from '../utils/helpers';
 
 class Quiz extends Component {
-  componentDidMount
-
   render() {
     return (
       <View>
-        <Text>This is quiz</Text>
+        <Text>{JSON.stringify(this.props.question)}</Text>
       </View>
     );
   }
 }
 
-export default connect()(Quiz);
+function mapStateToProps(state, { navigation }) {
+  return {
+    question: state.quizQuestions.find((question) =>
+      question.status === quizQuestionStatusEnum.NotAnswered)
+  };
+}
+
+export default connect(mapStateToProps)(Quiz);

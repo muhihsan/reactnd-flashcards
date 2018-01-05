@@ -3,6 +3,7 @@ import { View, Text, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import { AppLoading } from 'expo';
 import { getDeck } from '../utils/api';
+import { startQuiz } from '../actions/index';
 
 class DeckDetail extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -10,6 +11,17 @@ class DeckDetail extends Component {
     return {
       title: deckTitle
     };
+  }
+
+  startQuiz = () => {
+    const { deck, navigation, dispatch } = this.props;
+    dispatch(startQuiz(deck.title));
+    navigation.navigate(
+      'Quiz',
+      {
+        deckTitle: deck.title
+      }
+    );
   }
 
   render() {
@@ -30,12 +42,7 @@ class DeckDetail extends Component {
           <Text>Add Card</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => this.props.navigation.navigate(
-            'Quiz',
-            {
-              deckTitle: deck.title
-            }
-          )}>
+          onPress={this.startQuiz}>
           <Text>Start Quiz</Text>
         </TouchableOpacity>
       </View>

@@ -11,3 +11,9 @@ export function getDecksWithoutKeys(decks) {
     return decks[key];
   });
 }
+
+export const quizQuestionStatusEnum = {
+  NotAnswered: 0,
+  Correct: 1,
+  Incorrect: 2
+}
