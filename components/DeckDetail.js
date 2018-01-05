@@ -22,14 +22,22 @@ class DeckDetail extends Component {
         <TouchableOpacity
           onPress={() => this.props.navigation.navigate(
             'AddCard',
-            { 
+            {
               deckTitle: deck.title,
               deckDetailKey: this.props.navigation.state.key
             }
           )}>
           <Text>Add Card</Text>
         </TouchableOpacity>
-        <Text>Start Quiz</Text>
+        <TouchableOpacity
+          onPress={() => this.props.navigation.navigate(
+            'Quiz',
+            {
+              deckTitle: deck.title
+            }
+          )}>
+          <Text>Start Quiz</Text>
+        </TouchableOpacity>
       </View>
     );
   }
