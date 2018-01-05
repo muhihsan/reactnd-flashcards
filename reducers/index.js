@@ -1,5 +1,5 @@
 import { RECEIVE_DECKS, ADD_DECK, ADD_CARD, START_QUIZ } from '../actions';
-import { quizQuestionStatusEnum } from '../utils/helpers';
+import { quizQuestionStatusEnum, shuffleQuestions } from '../utils/helpers';
 
 function entries(state = {}, action) {
   switch (action.type) {
@@ -47,7 +47,7 @@ function entries(state = {}, action) {
       })) : null;
       return {
         ...state,
-        quizQuestions: questions
+        quizQuestions: shuffleQuestions(questions)
       };
     }
     default:
