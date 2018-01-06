@@ -1,4 +1,4 @@
-import { RECEIVE_DECKS, ADD_DECK, ADD_CARD, START_QUIZ } from '../actions';
+import { RECEIVE_DECKS, ADD_DECK, ADD_CARD, START_QUIZ, ANSWER_QUESTION } from '../actions';
 import { quizQuestionStatusEnum, shuffleQuestions } from '../utils/helpers';
 
 function entries(state = {}, action) {
@@ -41,13 +41,34 @@ function entries(state = {}, action) {
       return newState;
     case START_QUIZ: {
       const selectedDeck = state.decks.find((deck) => deck.title === action.title);
-      const questions = selectedDeck ? selectedDeck.questions.map((question) => ({
-        ...question,
+      const cards = selectedDeck ? selectedDeck.questions.map((card) => ({
+        ...card,
         status: quizQuestionStatusEnum.NotAnswered
       })) : null;
       return {
         ...state,
-        quizQuestions: shuffleQuestions(questions)
+        quizQuestions: shuffleQuestions(cards)
+      };
+    }
+    case ANSWER_QUESTION: {
+      let cardFound = false;
+      return {
+        ...state,
+        quizQuestions: quizQuestions.map((card) => {
+          let status = card.status;
+          if (!cardFound &&
+            card.question === action.card.question &&
+            card.answer === action.card.answer) {
+            cardFound = true;
+            status = action.status;
+          }
+
+          return {
+            question: card.question,
+            answer: card.answer,
+            status: status
+          };
+        })
       };
     }
     default:
