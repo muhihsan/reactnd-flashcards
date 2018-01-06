@@ -16,9 +16,25 @@ class Quiz extends Component {
   answerQuestion = (status) => {
     const { question, dispatch } = this.props;
     dispatch(answerQuestion(question, status));
+    navigation.navigate(
+      'Quiz',
+      {
+        deckTitle: deck.title
+      }
+    );
   }
 
   render() {
+    const { question } = this.props;
+
+    if (!question) {
+      return (
+        <View>
+          <Text>No more question.</Text>
+        </View>
+      );
+    }
+
     return (
       <View>
         <Text>{JSON.stringify(this.props.question)}</Text>
