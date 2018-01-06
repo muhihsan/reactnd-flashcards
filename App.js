@@ -69,13 +69,7 @@ const MainNavigator = StackNavigator({
     }
   },
   Quiz: {
-    screen: Quiz,
-    navigationOptions: {
-      headerTintColor: 'white',
-      headerStyle: {
-        backgroundColor: 'purple'
-      }
-    }
+    screen: Quiz
   }
 });
 
