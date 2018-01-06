@@ -5,6 +5,21 @@ import { quizQuestionStatusEnum } from '../utils/helpers';
 import { answerQuestion } from '../actions/index';
 
 class Quiz extends Component {
+  toDetail = () => {
+    const resetAction = NavigationActions.reset({
+      index: 1,
+      actions: [
+        NavigationActions.navigate({ routeName: 'Home' }),
+        NavigationActions.navigate({
+          routeName: 'DeckDetail',
+          params: { deckTitle: this.props.deckTitle }
+        })
+      ]
+    });
+
+    this.props.navigation.dispatch(resetAction);
+  }
+
   correctAnswer = () => {
     answerQuestion(quizQuestionStatusEnum.Correct);
   }
@@ -31,6 +46,10 @@ class Quiz extends Component {
       return (
         <View>
           <Text>No more question.</Text>
+          <TouchableOpacity
+            onPress={this.toDetail}>
+            <Text>BACK TO DETAIL</Text>
+          </TouchableOpacity>
         </View>
       );
     }
@@ -52,7 +71,10 @@ class Quiz extends Component {
 }
 
 function mapStateToProps(state, { navigation }) {
+  const { deckTitle } = navigation.state.params;
+
   return {
+    deckTitle,
     question: state.quizQuestions.find((question) =>
       question.status === quizQuestionStatusEnum.NotAnswered)
   };
