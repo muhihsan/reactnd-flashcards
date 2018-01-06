@@ -10,7 +10,7 @@ class AddDeck extends Component {
     deckTitle: ''
   }
 
-  toHome = () => {
+  toDeckDetail = () => {
     const resetAction = NavigationActions.reset({
       index: 1,
       actions: [
@@ -30,7 +30,7 @@ class AddDeck extends Component {
     const { deckTitle } = this.state;
     saveDeckTitle(deckTitle).then(() => {
       self.props.dispatch(addDeck(deckTitle));
-      self.toHome();
+      self.toDeckDetail();
     });
   }
 
