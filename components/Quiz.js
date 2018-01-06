@@ -1,10 +1,21 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity, Platform } from 'react-native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+  Platform,
+  StyleSheet
+} from 'react-native';
 import { connect } from 'react-redux';
 import { quizQuestionStatusEnum } from '../utils/helpers';
 import { answerQuestion } from '../actions/index';
 
 class Quiz extends Component {
+  state = {
+    showAnswer = false
+  }
+
   toDetail = () => {
     const resetAction = NavigationActions.reset({
       index: 1,
@@ -20,6 +31,14 @@ class Quiz extends Component {
     this.props.navigation.dispatch(resetAction);
   }
 
+  showAnswer = () => {
+    this.state({ showAnswer: true });
+  }
+
+  hideAnswer = () => {
+    this.state({ showAnswer: false });
+  }
+
   correctAnswer = () => {
     answerQuestion(quizQuestionStatusEnum.Correct);
   }
@@ -29,20 +48,21 @@ class Quiz extends Component {
   }
 
   answerQuestion = (status) => {
-    const { question, dispatch } = this.props;
-    dispatch(answerQuestion(question, status));
+    const { deckTitle, card, dispatch } = this.props;
+    dispatch(answerQuestion(card, status));
     navigation.navigate(
       'Quiz',
       {
-        deckTitle: deck.title
+        deckTitle: deckTitle
       }
     );
   }
 
   render() {
-    const { question } = this.props;
+    const { showAnswer } = this.state;
+    const { card } = this.props;
 
-    if (!question) {
+    if (!card) {
       return (
         <View>
           <Text>No more question.</Text>
@@ -56,7 +76,13 @@ class Quiz extends Component {
 
     return (
       <View>
-        <Text>{JSON.stringify(this.props.question)}</Text>
+        {!showAnswer && <Text>{card.question}</Text>}
+        {showAnswer && <Text>{card.answer}</Text>}
+        <TouchableWithoutFeedback
+          onPress={this.showAnswer}
+          onPressOut={this.hideAnswer}>
+          <Text>Answer</Text>
+        </TouchableWithoutFeedback>
         <TouchableOpacity
           onPress={this.correctAnswer}>
           <Text>CORRECT</Text>
@@ -75,8 +101,8 @@ function mapStateToProps(state, { navigation }) {
 
   return {
     deckTitle,
-    question: state.quizQuestions.find((question) =>
-      question.status === quizQuestionStatusEnum.NotAnswered)
+    card: state.quizQuestions.find((card) =>
+      card.status === quizQuestionStatusEnum.NotAnswered)
   };
 }
 
