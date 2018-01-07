@@ -36,8 +36,8 @@ class Decks extends Component {
           'DeckDetail',
           { deckTitle: item.title }
         )}>
-        <Text>{item.title}</Text>
-        <Text>{item.questions.length} card{item.questions.length > 1 ? 's' : ''}</Text>
+        <Text style={styles.title}>{item.title}</Text>
+        <Text style={styles.deck}>{item.questions.length} card{item.questions.length > 1 ? 's' : ''}</Text>
       </TouchableOpacity>
     );
   }
@@ -70,6 +70,8 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     marginRight: 10,
     marginTop: 17,
+    paddingTop: 20,
+    paddingBottom: 20,
     justifyContent: 'center',
     shadowRadius: 3,
     shadowOpacity: 0.8,
@@ -78,6 +80,16 @@ const styles = StyleSheet.create({
       width: 0,
       height: 3
     }
+  },
+  title: {
+    fontSize: 22,
+    textAlign: 'center'
+  },
+  deck: {
+    fontSize: 15,
+    textAlign: 'center',
+    marginTop: 10,
+    color: 'grey'
   }
 });
 
