@@ -13,7 +13,7 @@ import { answerQuestion } from '../actions/index';
 
 class Quiz extends Component {
   state = {
-    showAnswer = false
+    showAnswer: false
   }
 
   toDetail = () => {
