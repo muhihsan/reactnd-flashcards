@@ -97,7 +97,8 @@ class Quiz extends Component {
         {!showAnswer && <Text>{card.question}</Text>}
         {showAnswer && <Text>{card.answer}</Text>}
         <TouchableWithoutFeedback
-          onPress={this.showAnswer}
+          style={styles.answer}
+          onPressIn={this.showAnswer}
           onPressOut={this.hideAnswer}>
           <View>
             <Text>Answer</Text>
@@ -115,6 +116,13 @@ class Quiz extends Component {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  answer: {
+    marginTop: 10,
+    marginBottom: 10
+  },
+});
 
 function mapStateToProps(state, { navigation }) {
   const { deckTitle } = navigation.state.params;
