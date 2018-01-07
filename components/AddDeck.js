@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, TextInput, TouchableOpacity, Platform, StyleSheet } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 import { NavigationActions } from 'react-navigation';
 import { connect } from 'react-redux';
 import { saveDeckTitle } from '../utils/api';
@@ -37,10 +37,10 @@ class AddDeck extends Component {
   render() {
     return (
       <View style={styles.item}>
-        <Text>What is the title of your new deck?</Text>
+        <Text style={styles.question}>What is the title of your new deck?</Text>
         <TextInput style={styles.input} onChangeText={(deckTitle) => this.setState({ deckTitle })} />
         <TouchableOpacity
-          style={Platform.OS === 'ios' ? styles.iosSubmitBtn : styles.androidSubmitBtn}
+          style={styles.iosSubmitBtn}
           onPress={this.submit}>
           <Text style={styles.submitBtnText}>SUBMIT</Text>
         </TouchableOpacity>
@@ -53,29 +53,25 @@ const styles = StyleSheet.create({
   item: {
     marginTop: 17
   },
+  question: {
+    fontSize: 50
+  },
   input: {
     height: 40,
     borderColor: 'gray',
-    borderWidth: 1
+    borderWidth: 1,
+    marginTop: 25,
+    borderRadius: 10,
+    marginLeft: 20,
+    marginRight: 20,
   },
   iosSubmitBtn: {
-    backgroundColor: 'purple',
+    backgroundColor: 'black',
     padding: 10,
-    borderRadius: 7,
+    borderRadius: 10,
     height: 45,
-    marginLeft: 40,
-    marginRight: 40
-  },
-  androidSubmitBtn: {
-    backgroundColor: 'purple',
-    padding: 10,
-    paddingLeft: 30,
-    paddingRight: 30,
-    borderRadius: 2,
-    height: 45,
-    alignSelf: 'flex-end',
-    justifyContent: 'center',
-    alignItems: 'center'
+    width: 200,
+    marginTop: 25
   },
   submitBtnText: {
     color: 'white',
