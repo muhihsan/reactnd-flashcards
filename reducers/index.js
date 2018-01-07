@@ -54,7 +54,7 @@ function entries(state = {}, action) {
       let cardFound = false;
       return {
         ...state,
-        quizQuestions: quizQuestions.map((card) => {
+        quizQuestions: state.quizQuestions.map((card) => {
           let status = card.status;
           if (!cardFound &&
             card.question === action.card.question &&

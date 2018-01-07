@@ -7,9 +7,11 @@ import {
   Platform,
   StyleSheet
 } from 'react-native';
+import { NavigationActions } from 'react-navigation';
 import { connect } from 'react-redux';
 import { quizQuestionStatusEnum } from '../utils/helpers';
 import { answerQuestion } from '../actions/index';
+import { startQuiz } from '../actions/index';
 
 class Quiz extends Component {
   state = {
@@ -32,24 +34,35 @@ class Quiz extends Component {
   }
 
   showAnswer = () => {
-    this.state({ showAnswer: true });
+    this.setState({ showAnswer: true });
   }
 
   hideAnswer = () => {
-    this.state({ showAnswer: false });
+    this.setState({ showAnswer: false });
   }
 
   correctAnswer = () => {
-    answerQuestion(quizQuestionStatusEnum.Correct);
+    this.answerQuestion(quizQuestionStatusEnum.Correct);
   }
 
   incorrectAnswer = () => {
-    answerQuestion(quizQuestionStatusEnum.Incorrect);
+    this.answerQuestion(quizQuestionStatusEnum.Incorrect);
   }
 
   answerQuestion = (status) => {
-    const { deckTitle, card, dispatch } = this.props;
+    const { deckTitle, card, dispatch, navigation } = this.props;
     dispatch(answerQuestion(card, status));
+    navigation.navigate(
+      'Quiz',
+      {
+        deckTitle: deckTitle
+      }
+    );
+  }
+
+  restartQuiz = () => {
+    const { deckTitle, navigation, dispatch } = this.props;
+    dispatch(startQuiz(deckTitle));
     navigation.navigate(
       'Quiz',
       {
@@ -60,15 +73,20 @@ class Quiz extends Component {
 
   render() {
     const { showAnswer } = this.state;
-    const { card } = this.props;
+    const { card, correctAnswers, cards } = this.props;
 
     if (!card) {
       return (
         <View>
-          <Text>No more question.</Text>
+          <Text>Congratulations, you've completed the Quiz!</Text>
+          <Text>Your result is {correctAnswers ? correctAnswers.length : 0} out of {cards ? cards.length : 0}</Text>
           <TouchableOpacity
             onPress={this.toDetail}>
             <Text>BACK TO DETAIL</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={this.restartQuiz}>
+            <Text>Restart Quiz</Text>
           </TouchableOpacity>
         </View>
       );
@@ -81,7 +99,9 @@ class Quiz extends Component {
         <TouchableWithoutFeedback
           onPress={this.showAnswer}
           onPressOut={this.hideAnswer}>
-          <Text>Answer</Text>
+          <View>
+            <Text>Answer</Text>
+          </View>
         </TouchableWithoutFeedback>
         <TouchableOpacity
           onPress={this.correctAnswer}>
@@ -101,8 +121,13 @@ function mapStateToProps(state, { navigation }) {
 
   return {
     deckTitle,
+    cards: state.quizQuestions,
     card: state.quizQuestions.find((card) =>
-      card.status === quizQuestionStatusEnum.NotAnswered)
+      card.status === quizQuestionStatusEnum.NotAnswered),
+    correctAnswers: state.quizQuestions.filter((card) =>
+      card.status === quizQuestionStatusEnum.Correct),
+    incorrectAnswers: state.quizQuestions.filter((card) =>
+      card.status === quizQuestionStatusEnum.Incorrect),
   };
 }
 
