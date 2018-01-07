@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import { AppLoading } from 'expo';
 import { getDeck } from '../utils/api';
@@ -28,10 +28,11 @@ class DeckDetail extends Component {
     const { deck } = this.props;
 
     return (
-      <View>
-        <Text>{deck.title}</Text>
-        <Text>{deck.questions.length} card{deck.questions.length > 1 ? 's' : ''}</Text>
+      <View style={styles.item}>
+        <Text style={styles.title}>{deck.title}</Text>
+        <Text style={styles.deck}>{deck.questions.length} card{deck.questions.length > 1 ? 's' : ''}</Text>
         <TouchableOpacity
+          style={styles.iosAddCardBtn}
           onPress={() => this.props.navigation.navigate(
             'AddCard',
             {
@@ -39,16 +40,62 @@ class DeckDetail extends Component {
               deckDetailKey: this.props.navigation.state.key
             }
           )}>
-          <Text>Add Card</Text>
+          <Text style={styles.iosAddCardBtnText}>Add Card</Text>
         </TouchableOpacity>
         <TouchableOpacity
+          style={styles.iosStartQuizBtn}
           onPress={this.startQuiz}>
-          <Text>Start Quiz</Text>
+          <Text style={styles.iosStartQuizBtnText}>Start Quiz</Text>
         </TouchableOpacity>
       </View>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  item: {
+    marginTop: 22,
+    backgroundColor: 'azure'
+  },
+  title: {
+    fontSize: 40
+  },
+  deck: {
+    marginTop: 30,
+    fontSize: 20,
+    color: 'grey'
+  },
+  iosAddCardBtn: {
+    backgroundColor: 'white',
+    padding: 10,
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: 'black',
+    height: 45,
+    width: 200,
+    marginTop: 25
+  },
+  iosAddCardBtnText: {
+    color: 'black',
+    fontSize: 22,
+    textAlign: 'center'
+  },
+  iosStartQuizBtn: {
+    backgroundColor: 'black',
+    padding: 10,
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: 'black',
+    height: 45,
+    width: 200,
+    marginTop: 25
+  },
+  iosStartQuizBtnText: {
+    color: 'white',
+    fontSize: 22,
+    textAlign: 'center'
+  }
+});
 
 function mapStateToProps(state, { navigation }) {
   const { deckTitle } = navigation.state.params;

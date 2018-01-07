@@ -54,8 +54,9 @@ class AddCard extends Component {
 }
 
 const styles = StyleSheet.create({
-  item: {
-    marginTop: 17
+  items: {
+    marginTop: 22,
+    backgroundColor: 'azure'
   },
   input: {
     height: 40,

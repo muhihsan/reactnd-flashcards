@@ -13,16 +13,11 @@ class Decks extends Component {
   componentDidMount() {
     var self = this;
     const { dispatch } = self.props;
-    // addCardToDeck("JavaScript", createCard(
-    //   "Does React Nanodegree teach you JavaScript",
-    //   "Yes, totally!"
-    // )).then(() => {
     getDecks()
       .then((decks) => dispatch(receiveEntries(decks)))
       .then(({ decks }) => {
         self.setState({ ready: true });
       });
-    // });
   }
 
   keyExtractor = (item, index) => item.title;
@@ -61,7 +56,8 @@ class Decks extends Component {
 
 const styles = StyleSheet.create({
   items: {
-    marginTop: 10
+    marginTop: 22,
+    backgroundColor: 'azure'
   },
   item: {
     backgroundColor: 'white',

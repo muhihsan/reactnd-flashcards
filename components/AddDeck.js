@@ -51,7 +51,8 @@ class AddDeck extends Component {
 
 const styles = StyleSheet.create({
   item: {
-    marginTop: 17
+    marginTop: 22,
+    backgroundColor: 'azure'
   },
   question: {
     fontSize: 50

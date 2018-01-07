@@ -31,10 +31,10 @@ const Tabs = TabNavigator({
       header: null
     },
     tabBarOptions: {
-      activeTintColor: Platform.OS === 'ios' ? 'black' : 'white',
+      activeTintColor: 'darkblue',
       style: {
         height: 56,
-        backgroundColor: Platform.OS === 'ios' ? 'white' : 'black',
+        backgroundColor: 'lightblue',
         shadowColor: 'rgba(0, 0, 0, 0.24)',
         shadowOffset: {
           width: 0,
@@ -53,18 +53,18 @@ const MainNavigator = StackNavigator({
   DeckDetail: {
     screen: DeckDetail,
     navigationOptions: {
-      headerTintColor: 'white',
+      headerTintColor: 'darkblue',
       headerStyle: {
-        backgroundColor: 'purple'
+        backgroundColor: 'lightblue'
       }
     }
   },
   AddCard: {
     screen: AddCard,
     navigationOptions: {
-      headerTintColor: 'white',
+      headerTintColor: 'darkblue',
       headerStyle: {
-        backgroundColor: 'purple'
+        backgroundColor: 'lightblue'
       }
     }
   },
