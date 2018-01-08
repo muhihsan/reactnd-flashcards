@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, TextInput, TouchableOpacity, Platform, StyleSheet } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 import { NavigationActions } from 'react-navigation';
 import { connect } from 'react-redux';
 import { addCardToDeck } from '../utils/api';
@@ -41,10 +41,17 @@ class AddCard extends Component {
   render() {
     return (
       <View style={styles.item}>
-        <TextInput style={styles.input} onChangeText={(question) => this.setState({ question })} />
-        <TextInput style={styles.input} onChangeText={(answer) => this.setState({ answer })} />
+        <Text style={styles.question}>Your question and answer?</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Question"
+          onChangeText={(question) => this.setState({ question })} />
+        <TextInput
+          style={styles.input}
+          placeholder="Answer"
+          onChangeText={(answer) => this.setState({ answer })} />
         <TouchableOpacity
-          style={Platform.OS === 'ios' ? styles.iosSubmitBtn : styles.androidSubmitBtn}
+          style={styles.iosSubmitBtn}
           onPress={this.submit}>
           <Text style={styles.submitBtnText}>SUBMIT</Text>
         </TouchableOpacity>
@@ -54,33 +61,31 @@ class AddCard extends Component {
 }
 
 const styles = StyleSheet.create({
-  items: {
+  item: {
     marginTop: 22,
-    backgroundColor: 'azure'
+    backgroundColor: 'azure',
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  question: {
+    fontSize: 50
   },
   input: {
     height: 40,
     borderColor: 'gray',
-    borderWidth: 1
+    borderWidth: 1,
+    marginTop: 25,
+    borderRadius: 10,
+    width: 400
   },
   iosSubmitBtn: {
-    backgroundColor: 'purple',
+    backgroundColor: 'black',
     padding: 10,
-    borderRadius: 7,
+    borderRadius: 10,
     height: 45,
-    marginLeft: 40,
-    marginRight: 40
-  },
-  androidSubmitBtn: {
-    backgroundColor: 'purple',
-    padding: 10,
-    paddingLeft: 30,
-    paddingRight: 30,
-    borderRadius: 2,
-    height: 45,
-    alignSelf: 'flex-end',
-    justifyContent: 'center',
-    alignItems: 'center'
+    width: 200,
+    marginTop: 25
   },
   submitBtnText: {
     color: 'white',
