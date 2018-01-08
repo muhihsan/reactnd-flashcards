@@ -52,7 +52,10 @@ class AddDeck extends Component {
 const styles = StyleSheet.create({
   item: {
     marginTop: 22,
-    backgroundColor: 'azure'
+    backgroundColor: 'azure',
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   question: {
     fontSize: 50
@@ -63,8 +66,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     marginTop: 25,
     borderRadius: 10,
-    marginLeft: 20,
-    marginRight: 20,
+    width: 400
   },
   iosSubmitBtn: {
     backgroundColor: 'black',
