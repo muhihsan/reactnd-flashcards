@@ -77,8 +77,8 @@ class Quiz extends Component {
 
     if (!card) {
       return (
-        <View>
-          <Text>Congratulations, you've completed the Quiz!</Text>
+        <View style={styles.item}>
+          <Text style={styles.mainText}>Congratulations, you've completed the Quiz!</Text>
           <Text>Your result is {correctAnswers ? correctAnswers.length : 0} out of {cards ? cards.length : 0}</Text>
           <TouchableOpacity
             onPress={this.toDetail}>
@@ -93,24 +93,26 @@ class Quiz extends Component {
     }
 
     return (
-      <View>
-        {!showAnswer && <Text>{card.question}</Text>}
-        {showAnswer && <Text>{card.answer}</Text>}
+      <View style={styles.item}>
+        {!showAnswer && <Text style={styles.mainText}>{card.question}</Text>}
+        {showAnswer && <Text style={styles.mainText}>{card.answer}</Text>}
         <TouchableWithoutFeedback
-          style={styles.answer}
+          style={styles.iosAnswerBtn}
           onPressIn={this.showAnswer}
           onPressOut={this.hideAnswer}>
-          <View>
-            <Text>Answer</Text>
+          <View style={styles.iosAnswerBtn}>
+            <Text style={styles.iosAnswerBtnText}>Answer</Text>
           </View>
         </TouchableWithoutFeedback>
         <TouchableOpacity
+          style={styles.iosCorrectBtn}
           onPress={this.correctAnswer}>
-          <Text>CORRECT</Text>
+          <Text style={styles.iosCorrectBtnText}>CORRECT</Text>
         </TouchableOpacity>
         <TouchableOpacity
+          style={styles.iosIncorrectBtn}
           onPress={this.incorrectAnswer}>
-          <Text>INCORRECT</Text>
+          <Text style={styles.iosIncorrectBtnText}>INCORRECT</Text>
         </TouchableOpacity>
       </View>
     );
@@ -118,10 +120,53 @@ class Quiz extends Component {
 }
 
 const styles = StyleSheet.create({
-  answer: {
-    marginTop: 10,
-    marginBottom: 10
+  item: {
+    backgroundColor: 'azure',
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
   },
+  iosAnswerBtn: {
+    marginTop: 40
+  },
+  iosAnswerBtnText: {
+    color: 'red',
+    fontSize: 20,
+    textAlign: 'center'
+  },
+  mainText: {
+    fontSize: 40
+  },
+  iosCorrectBtn: {
+    backgroundColor: 'green',
+    padding: 10,
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: 'green',
+    height: 45,
+    width: 200,
+    marginTop: 45
+  },
+  iosCorrectBtnText: {
+    color: 'white',
+    fontSize: 22,
+    textAlign: 'center'
+  },
+  iosIncorrectBtn: {
+    backgroundColor: 'red',
+    padding: 10,
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: 'red',
+    height: 45,
+    width: 200,
+    marginTop: 45
+  },
+  iosIncorrectBtnText: {
+    color: 'white',
+    fontSize: 22,
+    textAlign: 'center'
+  }
 });
 
 function mapStateToProps(state, { navigation }) {
