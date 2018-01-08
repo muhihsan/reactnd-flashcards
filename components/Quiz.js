@@ -73,7 +73,8 @@ class Quiz extends Component {
 
   render() {
     const { showAnswer } = this.state;
-    const { card, correctAnswers, cards } = this.props;
+    const { card, correctAnswers, incorrectAnswers, cards } = this.props;
+    const currentQuestion = (correctAnswers ? correctAnswers.length : 0) + (incorrectAnswers ? incorrectAnswers.length : 0) + 1;
 
     if (!card) {
       return (
@@ -107,6 +108,7 @@ class Quiz extends Component {
 
     return (
       <View style={styles.item}>
+        <Text style={styles.count}>{currentQuestion}/{cards.length}</Text>
         {!showAnswer && <Text style={styles.mainText}>{card.question}</Text>}
         {showAnswer && <Text style={styles.mainText}>{card.answer}</Text>}
         <TouchableWithoutFeedback
@@ -147,7 +149,12 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: 'center'
   },
+  count: {
+    fontSize: 20,
+    color: 'grey'
+  },
   mainText: {
+    marginTop: 25,
     fontSize: 40,
     textAlign: 'center'
   },
