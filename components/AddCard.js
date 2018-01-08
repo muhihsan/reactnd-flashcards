@@ -17,10 +17,19 @@ class AddCard extends Component {
     };
   }
 
-  toHome = () => {
-    this.props.navigation.dispatch(NavigationActions.back({
-      key: this.props.navigation.state.params.deckDetailKey
-    }));
+  toDeckDetail = (deckTitle) => {
+    const resetAction = NavigationActions.reset({
+      index: 1,
+      actions: [
+        NavigationActions.navigate({ routeName: 'Home' }),
+        NavigationActions.navigate({
+          routeName: 'DeckDetail',
+          params: { deckTitle: deckTitle }
+        })
+      ]
+    });
+
+    this.props.navigation.dispatch(resetAction);
   }
 
   submit = () => {
@@ -34,7 +43,7 @@ class AddCard extends Component {
 
     addCardToDeck(deckTitle, card).then(() => {
       self.props.dispatch(addCard(deckTitle, card));
-      self.toHome();
+      self.toDeckDetail();
     });
   }
 
