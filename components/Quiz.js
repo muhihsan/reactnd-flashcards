@@ -79,14 +79,16 @@ class Quiz extends Component {
       return (
         <View style={styles.item}>
           <Text style={styles.mainText}>Congratulations, you've completed the Quiz!</Text>
-          <Text>Your result is {correctAnswers ? correctAnswers.length : 0} out of {cards ? cards.length : 0}</Text>
+          <Text style={styles.result}>Your result is {correctAnswers ? correctAnswers.length : 0} out of {cards ? cards.length : 0}</Text>
           <TouchableOpacity
+            style={styles.iosBackToDetailBtn}
             onPress={this.toDetail}>
-            <Text>BACK TO DETAIL</Text>
+            <Text style={styles.iosBackToDetailBtnText}>BACK TO DETAIL</Text>
           </TouchableOpacity>
           <TouchableOpacity
+            style={styles.iosRestartQuizBtn}
             onPress={this.restartQuiz}>
-            <Text>Restart Quiz</Text>
+            <Text style={styles.iosRestartQuizBtnText}>RESTART QUIZ</Text>
           </TouchableOpacity>
         </View>
       );
@@ -137,6 +139,9 @@ const styles = StyleSheet.create({
   mainText: {
     fontSize: 40
   },
+  result: {
+    fontSize: 25
+  },
   iosCorrectBtn: {
     backgroundColor: 'green',
     padding: 10,
@@ -163,6 +168,36 @@ const styles = StyleSheet.create({
     marginTop: 45
   },
   iosIncorrectBtnText: {
+    color: 'white',
+    fontSize: 22,
+    textAlign: 'center'
+  },
+  iosBackToDetailBtn: {
+    backgroundColor: 'white',
+    padding: 10,
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: 'black',
+    height: 45,
+    width: 200,
+    marginTop: 45
+  },
+  iosBackToDetailBtnText: {
+    color: 'black',
+    fontSize: 22,
+    textAlign: 'center'
+  },
+  iosRestartQuizBtn: {
+    backgroundColor: 'black',
+    padding: 10,
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: 'black',
+    height: 45,
+    width: 200,
+    marginTop: 45
+  },
+  iosRestartQuizBtnText: {
     color: 'white',
     fontSize: 22,
     textAlign: 'center'
