@@ -54,14 +54,16 @@ class DeckDetail extends Component {
 
 const styles = StyleSheet.create({
   item: {
-    marginTop: 22,
-    backgroundColor: 'azure'
+    backgroundColor: 'azure',
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   title: {
     fontSize: 40
   },
   deck: {
-    marginTop: 30,
+    marginTop: 50,
     fontSize: 20,
     color: 'grey'
   },
@@ -73,7 +75,7 @@ const styles = StyleSheet.create({
     borderColor: 'black',
     height: 45,
     width: 200,
-    marginTop: 25
+    marginTop: 45
   },
   iosAddCardBtnText: {
     color: 'black',
@@ -88,7 +90,7 @@ const styles = StyleSheet.create({
     borderColor: 'black',
     height: 45,
     width: 200,
-    marginTop: 25
+    marginTop: 45
   },
   iosStartQuizBtnText: {
     color: 'white',
