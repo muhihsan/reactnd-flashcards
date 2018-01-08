@@ -3,6 +3,7 @@ import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import { AppLoading } from 'expo';
 import { getDeck } from '../utils/api';
+import { clearLocalNotification, setLocalNotification } from '../utils/helpers';
 import { startQuiz } from '../actions/index';
 
 class DeckDetail extends Component {
@@ -16,6 +17,8 @@ class DeckDetail extends Component {
   startQuiz = () => {
     const { deck, navigation, dispatch } = this.props;
     dispatch(startQuiz(deck.title));
+    clearLocalNotification()
+      .then(setLocalNotification);
     navigation.navigate(
       'Quiz',
       {
