@@ -78,18 +78,29 @@ class Quiz extends Component {
     if (!card) {
       return (
         <View style={styles.item}>
-          <Text style={styles.mainText}>Congratulations, you've completed the Quiz!</Text>
-          <Text style={styles.result}>Your result is {correctAnswers ? correctAnswers.length : 0} out of {cards ? cards.length : 0}</Text>
+          {cards.length > 0 && (
+            <View>
+              <Text style={styles.mainText}>Congratulations, you've completed the Quiz!</Text>
+              <Text style={styles.result}>Your result is {correctAnswers ? correctAnswers.length : 0} out of {cards ? cards.length : 0}</Text>
+            </View>
+          )}
+          {cards.length === 0 && (
+            <View>
+              <Text style={styles.mainText}>You can't start quiz! Add card first</Text>
+            </View>
+          )}
           <TouchableOpacity
             style={styles.iosBackToDetailBtn}
             onPress={this.toDetail}>
             <Text style={styles.iosBackToDetailBtnText}>BACK TO DETAIL</Text>
           </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.iosRestartQuizBtn}
-            onPress={this.restartQuiz}>
-            <Text style={styles.iosRestartQuizBtnText}>RESTART QUIZ</Text>
-          </TouchableOpacity>
+          {cards.length > 0 && (
+            <TouchableOpacity
+              style={styles.iosRestartQuizBtn}
+              onPress={this.restartQuiz}>
+              <Text style={styles.iosRestartQuizBtnText}>RESTART QUIZ</Text>
+            </TouchableOpacity>
+          )}
         </View>
       );
     }
@@ -137,10 +148,13 @@ const styles = StyleSheet.create({
     textAlign: 'center'
   },
   mainText: {
-    fontSize: 40
+    fontSize: 40,
+    textAlign: 'center'
   },
   result: {
-    fontSize: 25
+    fontSize: 25,
+    textAlign: 'center',
+    marginTop: 25
   },
   iosCorrectBtn: {
     backgroundColor: 'green',
