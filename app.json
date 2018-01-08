@@ -7,9 +7,6 @@
     "slug": "udacifitness",
     "version": "1.0",
     "icon": "https://www.proprofs.com/flashcards/fc_home_v1/img/flashcard_laptop_screen5.jpg?v=2",
-    "notifications": {
-      "icon": "https://www.proprofs.com/flashcards/fc_home_v1/img/flashcard_laptop_screen5.jpg?v=2"
-    },
     "ios": {
       "bundleIdentifier": "org.udacifitness.exp"
     }

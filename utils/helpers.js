@@ -9,6 +9,9 @@ export function createCard(question, answer) {
 }
 
 export function getDecksWithoutKeys(decks) {
+  if (!decks) {
+    return [];
+  }
   const keys = Object.keys(decks);
   return keys.map((key) => {
     return decks[key];
