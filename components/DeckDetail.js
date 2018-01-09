@@ -30,6 +30,10 @@ class DeckDetail extends Component {
   render() {
     const { deck } = this.props;
 
+    if (!deck) {
+      return (<View></View>);
+    }
+
     return (
       <View style={styles.item}>
         <Text style={styles.title}>{deck.title}</Text>
@@ -104,7 +108,7 @@ const styles = StyleSheet.create({
 
 function mapStateToProps(state, { navigation }) {
   const { deckTitle } = navigation.state.params;
-
+debugger;
   return {
     deckTitle,
     deck: state.decks.find((deck) => deck.title === deckTitle)

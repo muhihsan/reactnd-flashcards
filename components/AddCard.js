@@ -43,7 +43,7 @@ class AddCard extends Component {
 
     addCardToDeck(deckTitle, card).then(() => {
       self.props.dispatch(addCard(deckTitle, card));
-      self.toDeckDetail();
+      self.toDeckDetail(deckTitle);
     });
   }
 
@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     marginTop: 25,
     borderRadius: 10,
-    width: 400
+    width: 250
   },
   iosSubmitBtn: {
     backgroundColor: 'black',

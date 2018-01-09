@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     marginTop: 25,
     borderRadius: 10,
-    width: 400
+    width: 250
   },
   iosSubmitBtn: {
     backgroundColor: 'black',
